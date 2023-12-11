@@ -1,11 +1,13 @@
 # from django.http import HttpResponse
 from django.shortcuts import render
 from utils.recipes.factory import make_recipe
+from .models import Recipe
 
 # Create your views here.
 def home(req):
+    recipes = Recipe.objects.all()
     return render(req, 'recipes/pages/home.html', context={
-        'recipes': [make_recipe() for _ in range(9)],
+        'recipes': recipes,
     })
 
 def recipes(req, id):
